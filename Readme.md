@@ -57,3 +57,13 @@ docker build --tag qt-linux-cmake:$DOCKER_TAG .
 docker tag qt-linux-cmake:$DOCKER_TAG reivilo1234/qt-linux-cmake:$DOCKER_TAG
 docker push reivilo1234/qt-linux-cmake:$DOCKER_TAG
 ```
+
+**qt5.15.1-gcc7**
+
+
+```bash
+export DOCKER_TAG=qt5.15.1-gcc7
+docker build --tag qt-linux-cmake:$DOCKER_TAG --build-arg GCC=7 --build-arg QT=5.15.1 .
+docker tag qt-linux-cmake:$DOCKER_TAG reivilo1234/qt-linux-cmake:$DOCKER_TAG
+docker push reivilo1234/qt-linux-cmake:$DOCKER_TAG
+```
