@@ -1,0 +1,42 @@
+name: Publish Docker image
+on:
+  push:
+    branches:
+      - main
+      - ci
+
+jobs:
+  build:
+    name: qt-linux-cmake
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        qt-version: ['5.15.1']
+        gcc: ['7']
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          build-args: QT_VERSION=${{ matrix.qt-version }},GCC=${{ matrix.gcc }}
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:qt${{ matrix.qt-version }}-gcc${{ matrix.gcc }}
+      -
+        name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
