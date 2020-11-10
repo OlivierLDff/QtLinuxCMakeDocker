@@ -4,7 +4,7 @@
 FROM ubuntu:16.04
 
 # Install Dependencies
-RUN apt-get update && apt-get -y install software-properties-common wget build-essential autoconf git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0 libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2 libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util1 libfontconfig libxcb-xkb1 libxkbcommon-x11-0 libegl1-mesa-dev
+RUN apt-get update && apt-get -y install software-properties-common wget build-essential autoconf git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0 libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2 libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1 libxcb-util1 libfontconfig libxcb-xkb1 libxkbcommon-x11-0 libegl1-mesa-dev unixodbc-dev
 
 # Update gcc for correct c++17 support
 # Possible value 7/8/9
