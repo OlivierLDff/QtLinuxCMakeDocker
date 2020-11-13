@@ -10,7 +10,8 @@ RUN apt-get update && apt-get -y install software-properties-common wget build-e
 # Possible value 7/8/9
 ARG GCC=9
 
-RUN apt-get install -y software-properties-common                         && \
+RUN echo "Install GCC ${GCC}"                                             && \
+    apt-get install -y software-properties-common                         && \
     add-apt-repository ppa:ubuntu-toolchain-r/test                        && \
     apt-get update                                                        && \
     apt-get -y install g++-${GCC}                                         && \
