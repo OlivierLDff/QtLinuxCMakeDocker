@@ -5,6 +5,7 @@ FROM ubuntu:16.04
 
 # Install Dependencies
 RUN apt update && \
+    apt upgrade -y && \
     apt -y install software-properties-common wget build-essential autoconf \
         git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev \
         zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip      \
@@ -42,7 +43,7 @@ RUN wget -c -nv https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cma
 
 # Install Qt
 ARG QT=5.15.1
-ARG QT_MODULES=''
+ARG QT_MODULES='qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
 ARG QT_ARCH=
@@ -69,12 +70,16 @@ RUN rm -rf ${Qt5_DIR}/qml/QtQuick/Controls.2/designer  && \
 RUN wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O /usr/bin/linuxdeployqt && \
     chmod a+x /usr/bin/linuxdeployqt
 
+ARG VCPKG=False
+ARG VCPKG_PACKAGES='openssl:x64-linux zlib:x64-linux spdlog:x64-linux aws-sdk-cpp[core,ec2,ecr]:x64-linux libssh:x64-linux ms-gsl:x64-linux'
+
 # Install vcpkg
-RUN cd /opt && \
-    git clone https://github.com/microsoft/vcpkg/ && \
-    cd vcpkg && \
-    ./bootstrap-vcpkg.sh --disableMetrics && \
-    ./vcpkg install openssl:x64-linux zlib:x64-linux spdlog:x64-linux \
-        aws-sdk-cpp[core,ec2,ecr]:x64-linux libssh:x64-linux ms-gsl:x64-linux
+RUN if [ "$VCPKG" = "True" ]; then \
+        cd /opt && \
+        git clone https://github.com/microsoft/vcpkg/ && \
+        cd vcpkg && \
+        ./bootstrap-vcpkg.sh --disableMetrics && \
+        ./vcpkg install ${VCPKG_PACKAGES}; \
+    fi
 
 WORKDIR /src
