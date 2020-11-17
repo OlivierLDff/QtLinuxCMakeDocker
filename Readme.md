@@ -11,7 +11,7 @@ Ready to use environment to compile application using Qt/CMake and deploy [AppIm
 
 This image is made to build cmake qt project for linux, but it can also build qmake based.
 
-### ⌨️ Interative bash
+### ⌨️ Interactive bash
 
 You can run an interactive bash to build whatever you need. Execute this command from you source folder, to map it to `/src` folder in the container.
 
