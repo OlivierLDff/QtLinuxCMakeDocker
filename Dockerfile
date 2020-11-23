@@ -39,6 +39,13 @@ RUN apt update                                                               && 
         libxcb-util1 libfontconfig libxcb-xkb1 libxkbcommon-x11-0               \
         libegl1-mesa-dev unixodbc-dev curl unzip tar pkg-config                 \
         libnss3                                                                 \
+        libxcomposite1                                                          \
+        libxrender-dev                                                          \
+        libxcursor-dev                                                          \
+        libxi-dev                                                               \
+        libxtst-dev                                                             \
+        libxrandr-dev                                                           \
+        libasound-dev                                                           \
                                                                              && \
     pip3 install --upgrade pip
 
