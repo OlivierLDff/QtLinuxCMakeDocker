@@ -47,7 +47,8 @@ RUN apt update                                                               && 
         libxrandr-dev                                                           \
         libasound-dev                                                           \
         libgstreamer1.0-dev                                                     \
-        libgstreamer-plugins-base1.0-dev
+        libgstreamer-plugins-base1.0-dev                                        \
+        libgtk3.0-cil-dev
 
 # Update gcc for correct c++17 support
 # Possible value 7/8/9
