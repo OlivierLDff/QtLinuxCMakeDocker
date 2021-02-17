@@ -45,9 +45,7 @@ RUN apt update                                                               && 
         libxi-dev                                                               \
         libxtst-dev                                                             \
         libxrandr-dev                                                           \
-        libasound-dev                                                           \
-                                                                             && \
-    pip3 install --upgrade pip
+        libasound-dev
 
 # Update gcc for correct c++17 support
 # Possible value 7/8/9
@@ -63,7 +61,7 @@ RUN echo "Install GCC ${GCC}"                                             && \
       --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC}                           \
       --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-${GCC}                  \
       --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-${GCC}                  \
-      --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-${GCC}  &&  \
+      --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-${GCC}   && \
     update-alternatives --config gcc
 
 # Build cool cmake version (ubuntu 16.04 comes with cmake 3.5)
@@ -79,6 +77,17 @@ ARG QT_MODULES='qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
 ARG QT_ARCH=
+
+# Update python (3.5 doesn't work with aqt)
+RUN add-apt-repository ppa:deadsnakes/ppa       && \
+    apt update                                  && \
+    apt -y install python3.7                    && \
+    update-alternatives --install                  \
+        /usr/bin/python3 python3                   \
+        /usr/bin/python3.7 1                    && \
+    python3 -m pip install --user --upgrade pip && \
+    pip3 install --upgrade pip && \
+    python3 --version
 
 # Download & Install Qt
 RUN pip3 install aqtinstall && \
