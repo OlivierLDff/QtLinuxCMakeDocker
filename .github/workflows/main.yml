@@ -38,5 +38,5 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:qt${{ matrix.qt-version }}-gcc${{ matrix.gcc }}
           build-args: |
-            QT_VERSION=${{ matrix.qt-version }}
+            QT=${{ matrix.qt-version }}
             GCC=${{ matrix.gcc }}
