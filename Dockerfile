@@ -48,7 +48,9 @@ RUN apt update                                                               && 
         libasound-dev                                                           \
         libgstreamer1.0-dev                                                     \
         libgstreamer-plugins-base1.0-dev                                        \
-        libgtk3.0-cil-dev
+        libgtk3.0-cil-dev                                                       \
+        libcurl4-openssl-dev
+
 
 # Update gcc for correct c++17 support
 # Possible value 7/8/9
