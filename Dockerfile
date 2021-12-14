@@ -50,7 +50,8 @@ RUN apt update                                                               && 
         libgstreamer-plugins-base1.0-dev                                        \
         libgtk3.0-cil-dev                                                       \
         libcurl4-openssl-dev                                                    \
-        libgomp1
+        libgomp1                                                                \
+        libomp-dev
 
 
 # Update gcc for correct c++17 support
