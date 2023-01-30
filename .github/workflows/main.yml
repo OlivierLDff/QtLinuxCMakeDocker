@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        qt-version: ['5.15.1', '5.15.2']
+        qt-version: ['5.15.11']
         gcc: ['7']
 
     steps:
