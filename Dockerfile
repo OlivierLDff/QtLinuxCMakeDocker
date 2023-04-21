@@ -72,7 +72,7 @@ RUN echo "Install GCC ${GCC}"                                             && \
     update-alternatives --config gcc
 
 # Build cool cmake version (ubuntu 16.04 comes with cmake 3.5)
-ARG CMAKE=3.19.0-rc3
+ARG CMAKE=3.26.3
 
 RUN wget -c -nv https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}-Linux-x86_64.sh && \
     sh cmake-${CMAKE}-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir && \
