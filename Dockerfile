@@ -78,6 +78,11 @@ RUN wget -c -nv https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cma
     sh cmake-${CMAKE}-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir && \
     rm cmake-${CMAKE}-Linux-x86_64.sh
 
+RUN add-apt-repository ppa:git-core/ppa && \
+    apt install -y git && \
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
+    apt install -y git-lfs && git lfs install
+
 # Install Qt
 ARG QT=5.15.1
 ARG QT_MODULES='qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
