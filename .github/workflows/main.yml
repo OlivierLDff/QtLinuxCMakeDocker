@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:qt${{ matrix.qt-version }}-gcc${{ matrix.gcc }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:ubuntu18-qt${{ matrix.qt-version }}-gcc${{ matrix.gcc }}
           build-args: |
             QT=${{ matrix.qt-version }}
             GCC=${{ matrix.gcc }}
