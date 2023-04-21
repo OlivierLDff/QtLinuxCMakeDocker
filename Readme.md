@@ -5,7 +5,7 @@
 Ready to use environment to compile application using Qt/CMake and deploy [AppImage](https://github.com/probonopd/linuxdeployqt).
 
 * Qt 5.15.1
-* CMake 3.18.4
+* CMake 3.26.3
 * GCC 9
 * linuxdeployqt
 
