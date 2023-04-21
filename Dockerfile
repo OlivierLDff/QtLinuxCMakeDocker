@@ -23,7 +23,9 @@
 # Should be run:
 # docker run -it --rm -v $(pwd):/src/ -u $(id -u):$(id -g) --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined
 # linuxdeployqt require for the application to be built with the oldest still supported glibc version
-FROM ubuntu:16.04
+FROM ubuntu:18.04
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Dependencies
 RUN apt update                                                               && \
@@ -82,6 +84,8 @@ RUN add-apt-repository ppa:git-core/ppa && \
     apt install -y git && \
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
     apt install -y git-lfs && git lfs install
+
+RUN apt install -y libstdc++6
 
 # Install Qt
 ARG QT=5.15.1
