@@ -85,6 +85,9 @@ RUN add-apt-repository ppa:git-core/ppa && \
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
     apt install -y git-lfs && git lfs install
 
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 RUN apt install -y libstdc++6
 
 # Install Qt
