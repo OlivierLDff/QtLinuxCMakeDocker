@@ -56,7 +56,7 @@ RUN apt update                                                               && 
 
 # Update gcc for correct c++17 support
 # Possible value 7/8/9
-ARG GCC=9
+ARG GCC=7
 
 RUN echo "Install GCC ${GCC}"                                             && \
     apt-get install -y software-properties-common                         && \
