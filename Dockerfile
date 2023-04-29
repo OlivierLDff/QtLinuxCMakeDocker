@@ -31,29 +31,29 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update                                                               && \
     apt upgrade -y                                                           && \
     apt -y install software-properties-common wget build-essential autoconf     \
-        git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev \
-        zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip      \
-        desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1          \
-        libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0   \
-        libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2    \
-        libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 \
-        libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1  \
-        libxcb-util1 libfontconfig libxcb-xkb1 libxkbcommon-x11-0               \
-        libegl1-mesa-dev unixodbc-dev curl unzip tar pkg-config                 \
-        libnss3                                                                 \
-        libxcomposite1                                                          \
-        libxrender-dev                                                          \
-        libxcursor-dev                                                          \
-        libxi-dev                                                               \
-        libxtst-dev                                                             \
-        libxrandr-dev                                                           \
-        libasound-dev                                                           \
-        libgstreamer1.0-dev                                                     \
-        libgstreamer-plugins-base1.0-dev                                        \
-        libgtk3.0-cil-dev                                                       \
-        libcurl4-openssl-dev                                                    \
-        libgomp1                                                                \
-        libomp-dev
+    git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev \
+    zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip      \
+    desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1          \
+    libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0   \
+    libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2    \
+    libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 \
+    libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1  \
+    libxcb-util1 libfontconfig libxcb-xkb1 libxkbcommon-x11-0               \
+    libegl1-mesa-dev unixodbc-dev curl unzip tar pkg-config                 \
+    libnss3                                                                 \
+    libxcomposite1                                                          \
+    libxrender-dev                                                          \
+    libxcursor-dev                                                          \
+    libxi-dev                                                               \
+    libxtst-dev                                                             \
+    libxrandr-dev                                                           \
+    libasound-dev                                                           \
+    libgstreamer1.0-dev                                                     \
+    libgstreamer-plugins-base1.0-dev                                        \
+    libgtk3.0-cil-dev                                                       \
+    libcurl4-openssl-dev                                                    \
+    libgomp1                                                                \
+    libomp-dev
 
 
 # Update gcc for correct c++17 support
@@ -66,11 +66,11 @@ RUN echo "Install GCC ${GCC}"                                             && \
     apt-get update                                                        && \
     apt-get -y install g++-${GCC}                                         && \
     update-alternatives                                                      \
-      --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC} 60                      \
-      --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC}                           \
-      --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-${GCC}                  \
-      --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-${GCC}                  \
-      --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-${GCC}   && \
+    --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC} 60                      \
+    --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC}                           \
+    --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-${GCC}                  \
+    --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-${GCC}                  \
+    --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-${GCC}   && \
     update-alternatives --config gcc
 
 # Build cool cmake version (ubuntu 16.04 comes with cmake 3.5)
@@ -102,8 +102,8 @@ RUN add-apt-repository ppa:deadsnakes/ppa       && \
     apt update                                  && \
     apt -y install python3.7                    && \
     update-alternatives --install                  \
-        /usr/bin/python3 python3                   \
-        /usr/bin/python3.7 1                    && \
+    /usr/bin/python3 python3                   \
+    /usr/bin/python3.7 1                    && \
     python3 -m pip install --user --upgrade pip && \
     pip3 install --upgrade pip && \
     python3 --version
@@ -135,11 +135,11 @@ ARG VCPKG_PACKAGES='openssl:x64-linux zlib:x64-linux spdlog:x64-linux aws-sdk-cp
 
 # Install vcpkg
 RUN if [ "$VCPKG" = "True" ]; then \
-        cd /opt && \
-        git clone https://github.com/microsoft/vcpkg/ && \
-        cd vcpkg && \
-        ./bootstrap-vcpkg.sh --disableMetrics && \
-        ./vcpkg install ${VCPKG_PACKAGES}; \
+    cd /opt && \
+    git clone https://github.com/microsoft/vcpkg/ && \
+    cd vcpkg && \
+    ./bootstrap-vcpkg.sh --disableMetrics && \
+    ./vcpkg install ${VCPKG_PACKAGES}; \
     fi
 
 WORKDIR /src
