@@ -53,7 +53,8 @@ RUN apt update                                                               && 
     libgtk3.0-cil-dev                                                       \
     libcurl4-openssl-dev                                                    \
     libgomp1                                                                \
-    libomp-dev
+    libomp-dev                                                              \
+    ninja-build
 
 
 # Update gcc for correct c++17 support
