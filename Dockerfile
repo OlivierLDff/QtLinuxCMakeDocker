@@ -143,4 +143,21 @@ RUN if [ "$VCPKG" = "True" ]; then \
     ./vcpkg install ${VCPKG_PACKAGES}; \
     fi
 
+# Dependencies to support video capture (uvc, genicam)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    pkg-config \
+    libv4l-dev \
+    clang lldb lld \
+    libudev-dev \
+    zlib1g-dev \
+    libfontconfig1-dev
+
+# Install latest libusb
+RUN git clone -b v1.0.26 https://github.com/libusb/libusb \
+    && cd libusb \
+    && ./bootstrap.sh \
+    && ./configure \
+    && make \
+    && make install
+
 WORKDIR /src
