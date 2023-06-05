@@ -160,4 +160,7 @@ RUN git clone -b v1.0.26 https://github.com/libusb/libusb \
     && make \
     && make install
 
+# Add libusb dans library path
+ENV LD_LIBRARY_PATH=/usr/local/lib
+
 WORKDIR /src
