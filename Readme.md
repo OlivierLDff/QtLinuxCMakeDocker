@@ -4,8 +4,8 @@
 
 Ready to use environment to compile application using Qt/CMake and deploy [AppImage](https://github.com/probonopd/linuxdeployqt).
 
-* Qt 5.15.1
-* CMake 3.26.3
+* Qt 5.15.2
+* CMake 3.29.0
 * GCC 9
 * linuxdeployqt
 
@@ -39,7 +39,7 @@ cd /path/to/my/project
 # Customize here your build folder name
 export BUILD_DIR=build
 # Create alias to run a command in the container
-alias docker-run='docker run --rm -v $(pwd):/src/ --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined reivilo1234/qt-linux-cmake:qt5.15.1'
+alias docker-run='docker run --rm -v $(pwd):/src/ --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined reivilo1234/qt-linux-cmake:qt5.15.2'
 
 # Create build directory in host
 mkdir -p $BUILD_DIR
@@ -56,26 +56,6 @@ Run in the same directory as the `Dockerfile`
 ```bash
 export DOCKER_TAG=qt5.15.1
 docker build --tag qt-linux-cmake:$DOCKER_TAG .
-docker tag qt-linux-cmake:$DOCKER_TAG reivilo1234/qt-linux-cmake:$DOCKER_TAG
-docker push reivilo1234/qt-linux-cmake:$DOCKER_TAG
-```
-
-**qt5.15.1-gcc7**
-
-
-```bash
-export DOCKER_TAG=qt5.15.1-gcc7
-docker build --tag qt-linux-cmake:$DOCKER_TAG --build-arg GCC=7 --build-arg QT=5.15.1 .
-docker tag qt-linux-cmake:$DOCKER_TAG reivilo1234/qt-linux-cmake:$DOCKER_TAG
-docker push reivilo1234/qt-linux-cmake:$DOCKER_TAG
-```
-
-**qt5.15.2-gcc7**
-
-
-```bash
-export DOCKER_TAG=qt5.15.2-gcc7
-docker build --tag qt-linux-cmake:$DOCKER_TAG --build-arg GCC=7 --build-arg QT=5.15.2 .
 docker tag qt-linux-cmake:$DOCKER_TAG reivilo1234/qt-linux-cmake:$DOCKER_TAG
 docker push reivilo1234/qt-linux-cmake:$DOCKER_TAG
 ```

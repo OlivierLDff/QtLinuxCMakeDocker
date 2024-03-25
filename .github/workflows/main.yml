@@ -9,8 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        qt-version: ['5.15.1', '5.15.2']
-        gcc: ['7']
+        qt-version: ['5.15.2']
 
     steps:
       -
@@ -33,7 +32,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:ubuntu18-qt${{ matrix.qt-version }}-gcc${{ matrix.gcc }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:ubuntu20-qt${{ matrix.qt-version }}
           build-args: |
             QT=${{ matrix.qt-version }}
-            GCC=${{ matrix.gcc }}
