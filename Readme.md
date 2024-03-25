@@ -1,6 +1,7 @@
 # 🐳 Qt Linux docker
 
 [![🐳 Publish Docker image](https://github.com/OlivierLDff/QtLinuxCMakeDocker/workflows/%F0%9F%90%B3%20Publish%20Docker%20image/badge.svg)](https://github.com/OlivierLDff/QtLinuxCMakeDocker/actions?query=workflow%3A%22%F0%9F%90%B3+Publish+Docker+image%22)
+[![Docker](https://img.shields.io/docker/pulls/reivilo1234/qt-linux-cmake)](https://hub.docker.com/r/reivilo1234/qt-linux-cmake)
 
 Ready to use environment to compile application using Qt/CMake and deploy [AppImage](https://github.com/probonopd/linuxdeployqt).
 
