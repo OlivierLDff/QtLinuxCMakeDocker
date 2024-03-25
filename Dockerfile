@@ -23,7 +23,7 @@
 # Should be run:
 # docker run -it --rm -v $(pwd):/src/ -u $(id -u):$(id -g) --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined
 # linuxdeployqt require for the application to be built with the oldest still supported glibc version
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -56,26 +56,12 @@ RUN apt update                                                               && 
     libomp-dev                                                              \
     ninja-build
 
-
-# Update gcc for correct c++17 support
-# Possible value 7/8/9
-ARG GCC=7
-
-RUN echo "Install GCC ${GCC}"                                             && \
+RUN \
     apt-get install -y software-properties-common                         && \
-    add-apt-repository ppa:ubuntu-toolchain-r/test                        && \
-    apt-get update                                                        && \
-    apt-get -y install g++-${GCC}                                         && \
-    update-alternatives                                                      \
-    --install /usr/bin/gcc gcc /usr/bin/gcc-${GCC} 60                      \
-    --slave /usr/bin/g++ g++ /usr/bin/g++-${GCC}                           \
-    --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-${GCC}                  \
-    --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-${GCC}                  \
-    --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-${GCC}   && \
-    update-alternatives --config gcc
+    apt-get update
 
 # Build cool cmake version (ubuntu 16.04 comes with cmake 3.5)
-ARG CMAKE=3.26.3
+ARG CMAKE=3.29.0
 
 RUN wget -c -nv https://github.com/Kitware/CMake/releases/download/v${CMAKE}/cmake-${CMAKE}-Linux-x86_64.sh && \
     sh cmake-${CMAKE}-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir && \
@@ -92,7 +78,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN apt install -y libstdc++6
 
 # Install Qt
-ARG QT=5.15.1
+ARG QT=5.15.2
 ARG QT_MODULES='qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
@@ -101,10 +87,10 @@ ARG QT_ARCH=
 # Update python (3.5 doesn't work with aqt)
 RUN add-apt-repository ppa:deadsnakes/ppa       && \
     apt update                                  && \
-    apt -y install python3.7                    && \
+    apt -y install python3.9                    && \
     update-alternatives --install                  \
     /usr/bin/python3 python3                   \
-    /usr/bin/python3.7 1                    && \
+    /usr/bin/python3.9 1                    && \
     python3 -m pip install --user --upgrade pip && \
     pip3 install --upgrade pip && \
     python3 --version
