@@ -54,7 +54,6 @@ RUN apt update                                                               && 
     libcurl4-openssl-dev                                                    \
     libgomp1                                                                \
     libomp-dev                                                              \
-    libeigen3-dev                                                           \
     ninja-build
 
 RUN \
@@ -149,5 +148,11 @@ RUN git clone -b v1.0.26 https://github.com/libusb/libusb \
 
 # Add libusb dans library path
 ENV LD_LIBRARY_PATH=/usr/local/lib
+
+# Install eigen
+RUN wget -O Eigen.zip https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip \
+    && unzip Eigen.zip \
+    && cmake -B eigen-3.4.0/build -S eigen-3.4.0 \
+    && cmake --build eigen-3.4.0/build --target install
 
 WORKDIR /src
