@@ -54,6 +54,7 @@ RUN apt update                                                               && 
     libcurl4-openssl-dev                                                    \
     libgomp1                                                                \
     libomp-dev                                                              \
+    libeigen3-dev                                                           \
     ninja-build
 
 RUN \
