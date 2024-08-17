@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        qt-version: ['5.15.2']
+        qt-version: ['5.15.2', '6.6.2']
 
     steps:
       -
