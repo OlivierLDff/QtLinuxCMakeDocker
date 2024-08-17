@@ -79,7 +79,7 @@ RUN apt install -y libstdc++6
 
 # Install Qt
 ARG QT=6.6.2
-ARG QT_MODULES='qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
+ARG QT_MODULES=''
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
 ARG QT_ARCH=
