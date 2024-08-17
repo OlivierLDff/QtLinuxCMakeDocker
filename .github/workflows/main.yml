@@ -9,8 +9,12 @@ jobs:
 
     strategy:
       matrix:
-        qt-version: ['5.15.2']
-
+        qt-version: ['5.15.2', '6.6.2']
+        include:
+          - qt-version: '5.15.2'
+            qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
+          - qt-version: '6.6.2'
+            qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview'
     steps:
       -
         name: ⬇ Check out the repo
@@ -35,3 +39,4 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:ubuntu20-qt${{ matrix.qt-version }}
           build-args: |
             QT=${{ matrix.qt-version }}
+            QT_MODULES=${{ matrix.qt-modules }}

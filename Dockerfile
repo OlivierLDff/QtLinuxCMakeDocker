@@ -78,8 +78,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN apt install -y libstdc++6
 
 # Install Qt
-ARG QT=5.15.2
-ARG QT_MODULES='qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
+ARG QT=6.6.2
+ARG QT_MODULES=''
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
 ARG QT_ARCH=
@@ -106,12 +106,7 @@ ENV QML2_IMPORT_PATH /opt/qt/${QT}/gcc_64/qml/
 ENV Qt5_DIR /opt/qt/${QT}/gcc_64/
 ENV Qt5_Dir /opt/qt/${QT}/gcc_64/
 ENV Qt6_DIR /opt/qt/${QT}/gcc_64/
-
-# Remove style I'm not interested in
-RUN rm -rf ${Qt5_DIR}/qml/QtQuick/Controls.2/designer  && \
-    rm -rf ${Qt5_DIR}/qml/QtQuick/Controls.2/Fusion    && \
-    rm -rf ${Qt5_DIR}/qml/QtQuick/Controls.2/Imagine   && \
-    rm -rf ${Qt5_DIR}/qml/QtQuick/Controls.2/Universal
+ENV Qt_DIR /opt/qt/${QT}/gcc_64/
 
 # Install linuxdeployqt
 RUN wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O /usr/bin/linuxdeployqt && \
