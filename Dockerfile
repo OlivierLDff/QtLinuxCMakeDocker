@@ -97,7 +97,8 @@ RUN add-apt-repository ppa:deadsnakes/ppa       && \
 
 # Download & Install Qt
 RUN pip3 install aqtinstall && \
-    aqt install --outputdir /opt/qt ${QT} ${QT_HOST} ${QT_TARGET} ${QT_ARCH} -m ${QT_MODULES}
+    aqt install --outputdir /opt/qt ${QT} ${QT_HOST} ${QT_TARGET} ${QT_ARCH} -m ${QT_MODULES} \
+    && rm -rf /opt/qt/${QT}/gcc_64/plugins/sqldrivers/libqsqlmimer.so
 
 ENV PATH /opt/qt/${QT}/gcc_64/bin:$PATH
 ENV QT_PLUGIN_PATH /opt/qt/${QT}/gcc_64/plugins/
