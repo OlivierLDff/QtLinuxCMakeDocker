@@ -54,7 +54,8 @@ RUN apt update                                                               && 
     libcurl4-openssl-dev                                                    \
     libgomp1                                                                \
     libomp-dev                                                              \
-    ninja-build
+    ninja-build                                                             \
+    libmysqlclient-dev
 
 RUN \
     apt-get install -y software-properties-common                         && \
