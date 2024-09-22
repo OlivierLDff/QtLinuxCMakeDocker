@@ -39,6 +39,7 @@ RUN apt update                                                               && 
     libxcb-glx0 libxcb-present0 libxcb-randr0 libxcb-record0 libxcb-render0 \
     libxcb-res0 libxcb-screensaver0 libxcb-shape0 libxcb-shm0 libxcb-sync1  \
     libxcb-util1 libfontconfig libxcb-xkb1 libxkbcommon-x11-0               \
+    libxkbfile-dev                                                          \
     libegl1-mesa-dev unixodbc-dev curl unzip tar pkg-config                 \
     libnss3                                                                 \
     libxcomposite1                                                          \
