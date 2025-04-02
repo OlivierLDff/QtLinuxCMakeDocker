@@ -80,7 +80,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN apt install -y libstdc++6
 
 # Install Qt
-ARG QT=6.6.2
+ARG QT=6.8.2
 ARG QT_MODULES=''
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
