@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        qt-version: ['5.15.2', '6.6.2', '6.7.3']
+        qt-version: ['5.15.2', '6.6.2', '6.7.3', '6.8.2']
         include:
           - qt-version: '5.15.2'
             qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
