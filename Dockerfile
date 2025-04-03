@@ -65,7 +65,7 @@ RUN apt update                                                               && 
     apt upgrade -y                                                           && \
     apt -y install software-properties-common wget build-essential autoconf     \
     git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev \
-    zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3                          \
+    zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip      \
     desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1          \
     libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0   \
     libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2    \
