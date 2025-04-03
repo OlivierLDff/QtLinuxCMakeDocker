@@ -20,6 +20,39 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# Install Qt
+ARG QT=6.8.2
+ARG QT_MODULES=''
+ARG QT_HOST=linux
+ARG QT_TARGET=desktop
+ARG QT_ARCH=
+
+FROM ubuntu:24.04 AS qt
+
+ARG QT
+ARG QT_MODULES
+ARG QT_HOST
+ARG QT_TARGET
+ARG QT_ARCH
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt update                                                               && \
+    apt upgrade -y                                                           && \
+    apt -y install python3 python3-venv
+
+RUN python3 -m venv /venv && \
+    . /venv/bin/activate && \
+    apt -y install python3-pip && \
+    pip install --upgrade pip
+
+RUN . /venv/bin/activate && \
+    pip install aqtinstall
+
+RUN . /venv/bin/activate && \
+    aqt install-qt -m ${QT_MODULES} -O /opt/qt ${QT_HOST} ${QT_TARGET} ${QT} ${QT_ARCH} \
+    && rm -rf /opt/qt/${QT}/gcc_64/plugins/sqldrivers/libqsqlmimer.so
+
 # Should be run:
 # docker run -it --rm -v $(pwd):/src/ -u $(id -u):$(id -g) --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined
 # linuxdeployqt require for the application to be built with the oldest still supported glibc version
@@ -32,7 +65,7 @@ RUN apt update                                                               && 
     apt upgrade -y                                                           && \
     apt -y install software-properties-common wget build-essential autoconf     \
     git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev \
-    zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip      \
+    zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3                          \
     desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1          \
     libxcb-render-util0 libxcb-xinerama0 libxcb-composite0 libxcb-cursor0   \
     libxcb-damage0 libxcb-dpms0 libxcb-dri2-0 libxcb-dri3-0 libxcb-ewmh2    \
@@ -58,10 +91,6 @@ RUN apt update                                                               && 
     ninja-build                                                             \
     libmysqlclient-dev
 
-RUN \
-    apt-get install -y software-properties-common                         && \
-    apt-get update
-
 # Build cool cmake version (ubuntu 16.04 comes with cmake 3.5)
 ARG CMAKE=3.30.3
 
@@ -74,33 +103,16 @@ RUN add-apt-repository ppa:git-core/ppa && \
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
     apt install -y git-lfs && git lfs install
 
+# Copy qt from previous stage
+COPY --from=qt /opt/qt /opt/qt
+
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN apt install -y libstdc++6
 
 # Install Qt
-ARG QT=6.6.2
-ARG QT_MODULES=''
-ARG QT_HOST=linux
-ARG QT_TARGET=desktop
-ARG QT_ARCH=
-
-# Update python (3.5 doesn't work with aqt)
-RUN add-apt-repository ppa:deadsnakes/ppa       && \
-    apt update                                  && \
-    apt -y install python3.9                    && \
-    update-alternatives --install                  \
-    /usr/bin/python3 python3                   \
-    /usr/bin/python3.9 1                    && \
-    python3 -m pip install --user --upgrade pip && \
-    pip3 install --upgrade pip && \
-    python3 --version
-
-# Download & Install Qt
-RUN pip3 install aqtinstall && \
-    aqt install --outputdir /opt/qt ${QT} ${QT_HOST} ${QT_TARGET} ${QT_ARCH} -m ${QT_MODULES} \
-    && rm -rf /opt/qt/${QT}/gcc_64/plugins/sqldrivers/libqsqlmimer.so
+ARG QT
 
 ENV PATH /opt/qt/${QT}/gcc_64/bin:$PATH
 ENV QT_PLUGIN_PATH /opt/qt/${QT}/gcc_64/plugins/
