@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        qt-version: ['5.15.2', '6.6.2', '6.7.3', '6.8.3']
+        qt-version: ['5.15.2', '6.6.2', '6.7.3', '6.8.3', '6.9.1']
         include:
           - qt-version: '5.15.2'
             qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
@@ -18,6 +18,8 @@ jobs:
           - qt-version: '6.7.3'
             qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview qtserialport qtshadertools qtquicktimeline qtwebsockets qtwebchannel qtpositioning'
           - qt-version: '6.8.3'
+            qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview qtserialport qtshadertools qtquicktimeline qtwebsockets qtwebchannel qtpositioning'
+          - qt-version: '6.9.1'
             qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview qtserialport qtshadertools qtquicktimeline qtwebsockets qtwebchannel qtpositioning'
     steps:
       -
