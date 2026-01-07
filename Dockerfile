@@ -165,4 +165,8 @@ RUN wget -O Eigen.zip https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.
     && cmake -B eigen-3.4.0/build -S eigen-3.4.0 \
     && cmake --build eigen-3.4.0/build --target install
 
+# Verify glibc compatibility with Qt tools
+# This will fail the build if Qt requires a newer glibc than the base image provides
+RUN /opt/qt/${QT}/gcc_64/libexec/qmlimportscanner -rootPath /tmp 2>&1 || { echo "ERROR: Qt tools require a newer glibc version than this Ubuntu provides"; exit 1; }
+
 WORKDIR /src
