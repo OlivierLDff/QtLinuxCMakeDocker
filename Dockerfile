@@ -63,7 +63,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Install Dependencies
 RUN apt update                                                               && \
     apt upgrade -y                                                           && \
-    apt -y install software-properties-common wget build-essential autoconf     \
+    apt -y install software-properties-common wget build-essential autoconf libtool \
     git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev \
     zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip      \
     desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1          \
@@ -149,7 +149,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfontconfig1-dev
 
 # Install latest libusb
-RUN git clone -b v1.0.26 https://github.com/libusb/libusb \
+RUN git clone -b v1.0.29 https://github.com/libusb/libusb \
     && cd libusb \
     && ./bootstrap.sh \
     && ./configure \
