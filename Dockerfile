@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 # Install Qt
-ARG QT=6.8.2
+ARG QT=6.10.1
 ARG QT_MODULES=''
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
@@ -56,7 +56,7 @@ RUN . /venv/bin/activate && \
 # Should be run:
 # docker run -it --rm -v $(pwd):/src/ -u $(id -u):$(id -g) --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined
 # linuxdeployqt require for the application to be built with the oldest still supported glibc version
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
