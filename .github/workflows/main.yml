@@ -9,16 +9,8 @@ jobs:
 
     strategy:
       matrix:
-        qt-version: ['5.15.2', '6.6.2', '6.7.3', '6.8.3', '6.9.1', '6.10.1']
+        qt-version: ['6.9.1', '6.10.1']
         include:
-          - qt-version: '5.15.2'
-            qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d'
-          - qt-version: '6.6.2'
-            qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview qtserialport qtshadertools qtquicktimeline qtwebsockets qtwebchannel qtpositioning'
-          - qt-version: '6.7.3'
-            qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview qtserialport qtshadertools qtquicktimeline qtwebsockets qtwebchannel qtpositioning'
-          - qt-version: '6.8.3'
-            qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview qtserialport qtshadertools qtquicktimeline qtwebsockets qtwebchannel qtpositioning'
           - qt-version: '6.9.1'
             qt-modules: 'qtcharts qtdatavis3d qtvirtualkeyboard qtwebengine qtquick3d qt3d qt5compat qtimageformats qtmultimedia qtwebview qtserialport qtshadertools qtquicktimeline qtwebsockets qtwebchannel qtpositioning'
           - qt-version: '6.10.1'
@@ -44,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:ubuntu20-qt${{ matrix.qt-version }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/qt-linux-cmake:ubuntu22-qt${{ matrix.qt-version }}
           build-args: |
             QT=${{ matrix.qt-version }}
             QT_MODULES=${{ matrix.qt-modules }}

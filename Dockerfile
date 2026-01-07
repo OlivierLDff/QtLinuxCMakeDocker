@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 # Install Qt
-ARG QT=6.8.2
+ARG QT=6.10.1
 ARG QT_MODULES=''
 ARG QT_HOST=linux
 ARG QT_TARGET=desktop
@@ -56,14 +56,14 @@ RUN . /venv/bin/activate && \
 # Should be run:
 # docker run -it --rm -v $(pwd):/src/ -u $(id -u):$(id -g) --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined
 # linuxdeployqt require for the application to be built with the oldest still supported glibc version
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Dependencies
 RUN apt update                                                               && \
     apt upgrade -y                                                           && \
-    apt -y install software-properties-common wget build-essential autoconf     \
+    apt -y install software-properties-common wget build-essential autoconf libtool \
     git fuse libgl1-mesa-dev psmisc libpq-dev libssl-dev openssl libffi-dev \
     zlib1g-dev libdbus-1-3 libpulse-mainloop-glib0 python3 python3-pip      \
     desktop-file-utils libxcb-icccm4 libxcb-image0 libxcb-keysyms1          \
@@ -149,7 +149,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfontconfig1-dev
 
 # Install latest libusb
-RUN git clone -b v1.0.26 https://github.com/libusb/libusb \
+RUN git clone -b v1.0.29 https://github.com/libusb/libusb \
     && cd libusb \
     && ./bootstrap.sh \
     && ./configure \
@@ -164,5 +164,9 @@ RUN wget -O Eigen.zip https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.
     && unzip Eigen.zip \
     && cmake -B eigen-3.4.0/build -S eigen-3.4.0 \
     && cmake --build eigen-3.4.0/build --target install
+
+# Verify glibc compatibility with Qt tools
+# This will fail the build if Qt requires a newer glibc than the base image provides
+RUN /opt/qt/${QT}/gcc_64/libexec/qmlimportscanner -rootPath /tmp 2>&1 || { echo "ERROR: Qt tools require a newer glibc version than this Ubuntu provides"; exit 1; }
 
 WORKDIR /src
