@@ -51,7 +51,8 @@ RUN . /venv/bin/activate && \
 
 RUN . /venv/bin/activate && \
     aqt install-qt -m ${QT_MODULES} -O /opt/qt ${QT_HOST} ${QT_TARGET} ${QT} ${QT_ARCH} \
-    && rm -rf /opt/qt/${QT}/gcc_64/plugins/sqldrivers/libqsqlmimer.so
+    && rm -rf /opt/qt/${QT}/gcc_64/plugins/sqldrivers/libqsqlmimer.so \
+    && rm -rf /opt/qt/${QT}/gcc_64/plugins/sqldrivers/libqsqloci.so
 
 # Should be run:
 # docker run -it --rm -v $(pwd):/src/ -u $(id -u):$(id -g) --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined
