@@ -89,7 +89,8 @@ RUN apt update                                                               && 
     libgomp1                                                                \
     libomp-dev                                                              \
     ninja-build                                                             \
-    libmysqlclient-dev
+    libmysqlclient-dev                                                      \
+    libfbclient2
 
 # Build cool cmake version (ubuntu 16.04 comes with cmake 3.5)
 ARG CMAKE=3.30.3
